@@ -1,15 +1,19 @@
 //Importar a biblioteca Express
-import express, {Request, Response} from "express";
+import express from "express";
+// Importar variáveis de ambiente
+import dotenv from "dotenv";
 
-//Criar a Aplicação Express
+// Carregar
+dotenv.config()
+
+// Criar a Aplicação Express
 const app = express();
 
-//Criar a rota GET principal
-app.get("/",(req:Request, res:Response)=>{
-    res.send("Bem-Vindo Pessoal!")
-})
+//Incluir as Controllers
+import login from "./controllers/login";
 
-
+//Criar as rotas
+app.use('/', login)
 
 //Iniciar o servidor na porta 8080
 app.listen(8080, () => {

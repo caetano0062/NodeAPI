@@ -3,8 +3,8 @@
     "target": "es2016",
     "module": "commonjs",
 
-    "outDir": "dist", //diretorio de saída dos arquivos já para a visualização
-    "rootDir": "src",
+    "outDir": "./dist", //diretorio de saída dos arquivos já para a visualização
+    "rootDir": "./src",
 
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
