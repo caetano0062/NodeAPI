@@ -1,6 +1,13 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 
+// Importar variáveis de ambiente
+import dotenv from "dotenv";
+
+// Carregar
+dotenv.config()
+
+
 export const AppDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
@@ -12,5 +19,6 @@ export const AppDataSource = new DataSource({
     logging: true,
     entities: [],
     subscribers: [],
-    migrations: [],
+    migrations: [__dirname + "/migration/*.ts"],
+    
 })
