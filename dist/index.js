@@ -12,9 +12,11 @@ dotenv_1.default.config();
 // Criar a Aplicação Express
 const app = (0, express_1.default)();
 //Incluir as Controllers
-const login_1 = __importDefault(require("./controllers/login"));
+const AuthController_1 = __importDefault(require("./controllers/AuthController"));
+const SituationsController_1 = __importDefault(require("./controllers/SituationsController"));
 //Criar as rotas
-app.use('/', login_1.default);
+app.use('/', AuthController_1.default);
+app.use("/", SituationsController_1.default);
 //Iniciar o servidor na porta 8080
 app.listen(8080, () => {
     console.log("Servidor Iniciado na porta 8080: http://localhost:8080");

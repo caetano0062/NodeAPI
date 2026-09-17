@@ -10,10 +10,13 @@ dotenv.config()
 const app = express();
 
 //Incluir as Controllers
-import login from "./controllers/login";
+import AuthController from "./controllers/AuthController";
+import SituationsController from "./controllers/SituationsController";
+
 
 //Criar as rotas
-app.use('/', login)
+app.use('/', AuthController)
+app.use("/", SituationsController);
 
 //Iniciar o servidor na porta 8080
 app.listen(8080, () => {
