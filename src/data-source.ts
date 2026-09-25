@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { situation } from "./entity/situations";
-import { user } from "./entity/users";
+import { Situation } from "./entity/Situations";
+import { User } from "./entity/Users";
 
 // Importar variáveis de ambiente
 import dotenv from "dotenv";
@@ -19,7 +19,7 @@ export const AppDataSource = new DataSource({
     database: "nodeapi",
     synchronize: false,
     logging: true,
-    entities: [situation, user],
+    entities: [Situation, User],
     subscribers: [],
    // migrations: [__dirname + "/migration/*.ts"],
     migrations: [__dirname + "/migration/*.{ts,js}"],

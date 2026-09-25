@@ -6,8 +6,8 @@ export class Situation {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column()
-    nameSituation!: string;
+    @Column({ name: "namesituation", unique: true })
+nameSituation!: string;
 
     @OneToMany(() => User, (user) => user.situation)
     users!: User[];
