@@ -76,5 +76,82 @@ router.post("/situations", async (req: Request, res: Response) => {
   }
 });
 
+
+// Criar a rota GET para buscar um item específico por ID
+router.put ("/situations/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    var data = req.body;
+
+    const situationRepository = AppDataSource.getRepository(Situation);
+
+    const situation = await situationRepository.findOneBy({
+      id: Number(id),
+    });
+
+    if (!situation) {
+      return res.status(404).json({
+        message: "Situação não encontrada!",
+      });
+    }
+
+  //Atuliza os dados
+situationRepository.merge(situation, data);
+
+//Salvar as alterações de dados
+const updateSituation = await situationRepository.save(situation)
+
+res.status(200).json({
+    mensagem : "Situação atualizada com sucesso!",
+    situation: updateSituation,
+});
+
+}catch(error){
+    res.status(500).json({
+        mensagem : "Erro ao atualziar situação!",
+    });
+    return
+}
+
+});
+
+
+
+
+// Criar a rota GET para buscar um item específico por ID
+router.delete ("/situations/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const situationRepository = AppDataSource.getRepository(Situation);
+
+    const situation = await situationRepository.findOneBy({
+      id: Number(id),
+    });
+
+    if (!situation) {
+      return res.status(404).json({
+        message: "Situação não encontrada!",
+      });
+    }
+
+//remover os dados no banco de dados
+await situationRepository.remove(situation);
+
+res.status(200).json({
+    messagem : "Situação foi removida com sucesso!",
+});
+
+}catch(error){
+    res.status(500).json({
+        mensagem : "Erro ao Deletar situação!",
+    });
+    return
+}
+
+});
+
+
 // Exportar a instrução da rota
 export default router;
