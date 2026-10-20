@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const typeorm_1 = require("typeorm");
@@ -33,7 +32,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.ManyToOne)(() => ProductCategories_1.ProductCategory, (productCategory) => productCategory.products),
     (0, typeorm_1.JoinColumn)({ name: "productCategoryId" }),
-    __metadata("design:type", typeof (_a = typeof ProductCategories_1.ProductCategory !== "undefined" && ProductCategories_1.ProductCategory) === "function" ? _a : Object)
+    __metadata("design:type", ProductCategories_1.ProductCategory)
 ], Product.prototype, "productCategory", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }),
