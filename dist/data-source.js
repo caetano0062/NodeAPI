@@ -8,6 +8,9 @@ require("reflect-metadata");
 const typeorm_1 = require("typeorm");
 const Situations_1 = require("./entity/Situations");
 const Users_1 = require("./entity/Users");
+const Products_1 = require("./entity/Products");
+const ProductCategories_1 = require("./entity/ProductCategories");
+const ProductSituations_1 = require("./entity/ProductSituations");
 // Importar variáveis de ambiente
 const dotenv_1 = __importDefault(require("dotenv"));
 // Carregar
@@ -21,7 +24,7 @@ exports.AppDataSource = new typeorm_1.DataSource({
     database: "nodeapi",
     synchronize: false,
     logging: true,
-    entities: [Situations_1.Situation, Users_1.User],
+    entities: [Situations_1.Situation, Users_1.User, Products_1.Product, ProductCategories_1.ProductCategory, ProductSituations_1.ProductSituation],
     subscribers: [],
     // migrations: [__dirname + "/migration/*.ts"],
     migrations: [__dirname + "/migration/*.{ts,js}"],

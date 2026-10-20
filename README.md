@@ -214,6 +214,69 @@ Testes finais
 
 List : http://localhost:8080/situations?page=9&limit=2
 
-```
+
+
+---
+
+## 📦 Exemplos de Body (JSON) por Tabela
+
+### `situations`
+
+```json
+// POST http://localhost:8080/situations
+{
+  "nameSituation": "Ativo"
+}
+// PUT http://localhost:8080/situations/1
+{
+  "nameSituation": "Inativo"
+}
+users
+// POST http://localhost:8080/users
+{
+  "name": "Felipe Caetano",
+  "email": "felipe@email.com",
+  "situationId": 1
+}
+// PUT http://localhost:8080/users/1
+{
+  "name": "Felipe Caetano Bastos",
+  "email": "felipe@email.com",
+  "situationId": 2
+}
+product_categories
+// POST http://localhost:8080/product-categories
+{
+  "name": "Eletrônicos"
+}
+// PUT http://localhost:8080/product-categories/1
+{
+  "name": "Eletrodomésticos"
+}
+product_situations
+// POST http://localhost:8080/product-situations
+{
+  "name": "Disponível"
+}
+// PUT http://localhost:8080/product-situations/1
+{
+  "name": "Esgotado"
+}
+products
+// POST http://localhost:8080/products
+{
+  "name": "Notebook",
+  "productCategoryId": 1,
+  "productSituationId": 1
+}
+// PUT http://localhost:8080/products/1
+{
+  "name": "Notebook Gamer",
+  "productCategoryId": 1,
+  "productSituationId": 2
+}
+
+
+
 
 ```

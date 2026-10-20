@@ -20,6 +20,8 @@ import dotenv from "dotenv";
 dotenv.config()
 
 
+
+
 export const AppDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
@@ -29,10 +31,11 @@ export const AppDataSource = new DataSource({
     database: "nodeapi",
     synchronize: false,
     logging: true,
-    entities: [Situation, User],
+    entities: [Situation, User, Product, ProductCategory, ProductSituation], // adicionado 20/10 
     subscribers: [],
    // migrations: [__dirname + "/migration/*.ts"],
     migrations: [__dirname + "/migration/*.{ts,js}"],
+    
     
 })
 
