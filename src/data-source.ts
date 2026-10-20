@@ -2,6 +2,16 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { Situation } from "./entity/Situations";
 import { User } from "./entity/Users";
+import { Product } from "./entity/Products"
+import { ProductCategory } from "./entity/ProductCategories"
+import { ProductSituation } from "./entity/ProductSituations"
+
+
+
+
+
+
+
 
 // Importar variáveis de ambiente
 import dotenv from "dotenv";
