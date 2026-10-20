@@ -17,6 +17,8 @@ API RESTful desenvolvida com **Node.js**, **Express**, **TypeScript**, **TypeORM
 
 ---
 
+
+
 ## ⚙️ Variáveis de Ambiente (`.env`)
 
 Crie um ficheiro `.env` na raiz do projeto com as seguintes variáveis:

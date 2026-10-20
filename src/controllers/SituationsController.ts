@@ -1,20 +1,31 @@
 import { Request, Response, Router } from "express";
 import { AppDataSource } from "../data-source";
 import { Situation } from "../entity/Situations";
+import { PaginationService } from "../services/PaginationService";
 
 const router = Router();
 
-// Criar a rota GET principal
+// Criar a rota GET principal (Atualizada com Paginação da aula)
 router.get("/situations", async (req: Request, res: Response) => {
   try {
+    // Obter o repositório da entidade Situation
     const situationRepository = AppDataSource.getRepository(Situation);
 
-    const situations = await situationRepository.find();
+    // Receber o número da página e definir página 1 como padrão
+    const page = Number(req.query.page) || 1;
+    
+// Definir o limite de registros por página
+        const limit = Number(req.query.limit) || 10;
 
-    return res.status(200).json({
-      message: "Situações listadas com sucesso!",
-      situations: situations,
-    });
+        const result = await PaginationService.paginate(situationRepository, page, limit, {id: "DESC"});
+
+
+
+
+        // Retornar a resposta com os dados e informações da paginação
+        res.status(200).json(result);
+        return;
+    
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -76,8 +87,7 @@ router.post("/situations", async (req: Request, res: Response) => {
   }
 });
 
-
-// Criar a rota GET para buscar um item específico por ID
+// Criar a rota PUT para atualizar um item específico por ID
 router.put ("/situations/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -96,30 +106,26 @@ router.put ("/situations/:id", async (req: Request, res: Response) => {
       });
     }
 
-  //Atuliza os dados
-situationRepository.merge(situation, data);
+    //Atuliza os dados
+    situationRepository.merge(situation, data);
 
-//Salvar as alterações de dados
-const updateSituation = await situationRepository.save(situation)
+    //Salvar as alterações de dados
+    const updateSituation = await situationRepository.save(situation)
 
-res.status(200).json({
-    mensagem : "Situação atualizada com sucesso!",
-    situation: updateSituation,
-});
-
-}catch(error){
-    res.status(500).json({
-        mensagem : "Erro ao atualziar situação!",
+    res.status(200).json({
+        mensagem : "Situação atualizada com sucesso!",
+        situation: updateSituation,
     });
-    return
-}
 
+  }catch(error){
+      res.status(500).json({
+          mensagem : "Erro ao atualziar situação!",
+      });
+      return
+  }
 });
 
-
-
-
-// Criar a rota GET para buscar um item específico por ID
+// Criar a rota DELETE para remover um item específico por ID
 router.delete ("/situations/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -136,22 +142,20 @@ router.delete ("/situations/:id", async (req: Request, res: Response) => {
       });
     }
 
-//remover os dados no banco de dados
-await situationRepository.remove(situation);
+    //remover os dados no banco de dados
+    await situationRepository.remove(situation);
 
-res.status(200).json({
-    messagem : "Situação foi removida com sucesso!",
-});
-
-}catch(error){
-    res.status(500).json({
-        mensagem : "Erro ao Deletar situação!",
+    res.status(200).json({
+        messagem : "Situação foi removida com sucesso!",
     });
-    return
-}
 
+  }catch(error){
+      res.status(500).json({
+          mensagem : "Erro ao Deletar situação!",
+      });
+      return
+  }
 });
-
 
 // Exportar a instrução da rota
 export default router;
