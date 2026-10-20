@@ -12,7 +12,7 @@ API RESTful desenvolvida com **Node.js**, **Express**, **TypeScript**, **TypeORM
 - **Linguagem:** TypeScript
 - **Framework Web:** Express
 - **ORM:** TypeORM
-- **Banco de Dados:** PostgreSQL / MySQL (`pg` / `mysql2`)
+- **Banco de Dados:** PostgreSQL  (`pg` )
 - **Utilitários:** `dotenv`, `reflect-metadata`, `ts-node-dev`, `concurrently`
 
 ---
@@ -29,9 +29,9 @@ DB_HOST="localhost"
 DB_PORT=
 DB_DATABASE="nodeapi"
 DB_USERNAME="postgres"
-DB_PASSWORD="sua_senha_aqui"
+DB_PASSWORD=""
 
-PORT=8080
+
 
 ```
 
