@@ -147,11 +147,11 @@ router.put("/situations/:id", (req, res) => __awaiter(void 0, void 0, void 0, fu
             res.status(400).json({
                 messagem: error.errors
             });
+            return;
         }
         res.status(500).json({
             mensagem: "Erro ao atualziar situação!",
         });
-        return;
     }
 }));
 // Criar a rota DELETE para remover um item específico por ID
