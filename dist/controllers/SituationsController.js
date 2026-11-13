@@ -37,6 +37,7 @@ const data_source_1 = require("../data-source");
 const Situations_1 = require("../entity/Situations");
 const PaginationService_1 = require("../services/PaginationService");
 const yup = __importStar(require("yup"));
+const typeorm_1 = require("typeorm");
 const router = (0, express_1.Router)();
 // Criar a rota GET principal (Atualizada com Paginação da aula)
 router.get("/situations", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -95,6 +96,15 @@ router.post("/situations", (req, res) => __awaiter(void 0, void 0, void 0, funct
         });
         yield schema.validate(data, { abortEarly: false });
         const situationRepository = data_source_1.AppDataSource.getRepository(Situations_1.Situation);
+        const existingSituation = yield situationRepository.findOne({
+            where: { nameSituation: data.nameSituation }
+        });
+        if (existingSituation) {
+            res.status(400).json({
+                messagem: "Já existe uma situação cadastrada com esse nome!"
+            });
+            return;
+        }
         const newSituation = situationRepository.create(data);
         yield situationRepository.save(newSituation);
         return res.status(201).json({
@@ -125,6 +135,18 @@ router.put("/situations/:id", (req, res) => __awaiter(void 0, void 0, void 0, fu
         });
         yield schema.validate(data, { abortEarly: false });
         const situationRepository = data_source_1.AppDataSource.getRepository(Situations_1.Situation);
+        const existingSituation = yield situationRepository.findOne({
+            where: {
+                nameSituation: data.nameSituation,
+                id: (0, typeorm_1.Not)(parseInt(id)),
+            }
+        });
+        if (existingSituation) {
+            res.status(400).json({
+                messagem: "Já existe uma situação cadastrada com esse nome!"
+            });
+            return;
+        }
         const situation = yield situationRepository.findOneBy({
             id: Number(id),
         });
